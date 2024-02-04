@@ -1,3 +1,22 @@
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+required_packages = [
+    "numpy",
+    "statsmodels",
+    "scikit-learn",
+    "tensorflow"
+]
+
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        install(package)
+
 import numpy as np
 import statsmodels.api as sm
 from sklearn.model_selection import KFold, train_test_split
